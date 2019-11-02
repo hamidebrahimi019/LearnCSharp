@@ -1,0 +1,2 @@
+﻿تفاوت name space و dll چیست؟
+و دسترسی internal چگونه است؟
