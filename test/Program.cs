@@ -10,6 +10,11 @@ namespace CustomCollection
         {
             try
             {
+                int i = 42;
+                System.Type type = i.GetType();
+                System.Console.WriteLine(type);
+
+                //test
                 // استک و صف همزمان
                 Console.WriteLine("queue: ");
                 FifoLifoList<string> fl = new FifoLifoList<string>((int)CollectionNames.Queue);
