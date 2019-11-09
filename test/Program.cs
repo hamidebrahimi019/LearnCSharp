@@ -1,6 +1,7 @@
 ﻿using CustomCollection.Classes;
 using System;
 using static CustomCollection.Classes.MyProjectEnums;
+using ExtensionMethods;
 
 namespace CustomCollection
 {
@@ -10,6 +11,11 @@ namespace CustomCollection
         {
             try
             {
+                var strToFind = "ahbc";
+                var strPrimary = "ckbda";
+                var isContain = strPrimary.FindSubString(strToFind);
+                var xvb = 0;
+                #region MyRegion
                 int i = 42;
                 System.Type type = i.GetType();
                 System.Console.WriteLine(type);
@@ -100,11 +106,31 @@ namespace CustomCollection
                 stack.Push("second");
                 stack.Push("third");
                 stack.PrintAll();
+                #endregion
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
+        }
+    }
+}
+
+namespace ExtensionMethods
+{
+    public static class MyExtensions
+    {
+        public static bool FindSubString(this string strPrimary, string strToFind)
+        {
+            var found = false;
+            var strToFindCharArray = strToFind.ToCharArray();
+            foreach (var item in strToFindCharArray)
+            {
+                found = strPrimary.Contains(item);
+                if (!found)
+                    break;
+            }
+            return found;
         }
     }
 }
