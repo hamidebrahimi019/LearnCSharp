@@ -10,7 +10,7 @@ namespace CustomCollection
         {
             var strToFind = "abc";
             var strPrimary = "ckbda";
-            var isContain = strPrimary.FindSubString(strToFind);
+            var isContain = strPrimary.ContainsSubString(strToFind);
         }
     }
 }
@@ -19,7 +19,7 @@ namespace ExtensionMethods
 {
     public static class MyExtensions
     {
-        public static bool FindSubString(this string strPrimary, string strToFind)
+        public static bool ContainsSubString(this string strPrimary, string strToFind)
         {
             var found = false;
             var strToFindCharArray = strToFind.ToCharArray();

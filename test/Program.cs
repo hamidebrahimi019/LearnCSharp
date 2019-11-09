@@ -2,6 +2,7 @@
 using System;
 using static CustomCollection.Classes.MyProjectEnums;
 using ExtensionMethods;
+using System.Text.RegularExpressions;
 
 namespace CustomCollection
 {
@@ -11,9 +12,14 @@ namespace CustomCollection
         {
             try
             {
-                var strToFind = "ahbc";
-                var strPrimary = "ckbda";
-                var isContain = strPrimary.FindSubString(strToFind);
+                var a = "abc";
+                var b = "abd";
+
+                var regex = new Regex(".*my (.*) is.*");
+                var vv = regex.IsMatch("This is an example string and my data is here");
+
+
+                var isContain = b.ContainsSubString(a);
                 var xvb = 0;
                 #region MyRegion
                 int i = 42;
@@ -120,7 +126,7 @@ namespace ExtensionMethods
 {
     public static class MyExtensions
     {
-        public static bool FindSubString(this string strPrimary, string strToFind)
+        public static bool ContainsSubString(this string strPrimary, string strToFind)
         {
             var found = false;
             var strToFindCharArray = strToFind.ToCharArray();
