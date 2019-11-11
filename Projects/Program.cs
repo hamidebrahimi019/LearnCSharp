@@ -1,3 +1,6 @@
+//راه حلت درسته اما مرتبه زمانیش بالاس
+// آیا می تونی راه حلی بدی که مرتبه زمانی بهتری داشته باشه؟
+//
 using CustomCollection.Classes;
 using System;
 using ExtensionMethods;
@@ -23,6 +26,7 @@ namespace ExtensionMethods
         {
             var found = false;
             var strToFindCharArray = strToFind.ToCharArray();
+            
             foreach (var item in strToFindCharArray)
             {
                 found = strPrimary.Contains(item);
