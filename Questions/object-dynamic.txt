@@ -1,2 +1,19 @@
-tafavote object va dynamic chie?
+﻿tafavote object va dynamic chie?
 javabe typeof(List<Object>) == typeof(List<Dynamic>) chie? (true/false)
+
+
+var areEqual = typeof(List<object>) == typeof(List<dynamic>); => javab mishe true brabar hastan
+
+هردو مثل هم هستن و در زمان اجرا نوعشون مشخص میشه 
+ولی آبجکت باید کست بشه
+
+object obj = 10;
+            Console.WriteLine(obj.GetType()); => int32
+            obj = (int)obj + 10;
+
+ولی داینامیک نیازی به کست نداره
+
+dynamic dyn = 10;
+            Console.WriteLine(dyn.GetType()); => int32
+            dyn = dyn + 10;
+

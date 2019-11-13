@@ -1,1 +1,11 @@
-tafaveote Generic type toye C# ba Java Chie?
+﻿tafaveote Generic type toye C# ba Java Chie?
+
+c#: List<Person> personList = new List<Person>();
+کامپایلر در زمان کامپایل به جای این لیست یک لیست غیر جنریک قرار می دهد
+و سی شارپ با نسخه های پایین تر خود سازگار نیست
+
+java: ArrayList<Person> personList = new ArrayList<Person>();
+اما در جاوا
+کامپایلر در زمان کامپایل به جای این لیست یک لیست غیر جنریک قرار نمی دهد
+و آن را کست می کند
+بنابراین جاوا با نسخه های پایینتر آن سازگار است
