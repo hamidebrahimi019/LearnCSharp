@@ -142,67 +142,50 @@
 
 
 
-//using System;
-//using System.Linq;
-//using System.Text;
-//using System.Text.RegularExpressions;
-//using System.Threading.Tasks;
-//using System.Threading;
-//using System.Collections.Generic;
-
-//namespace TestApplication
-//{
-//    class Foo
-//    {
-//        static string inputText = "kk";
-//        public static void print() => Console.WriteLine(inputText);
-//        public static Foo GetInstance()
-//        {
-//            Type type = typeof(Foo);
-//            Foo f = (Foo)Activator.CreateInstance(type, true);
-//            return f;
-//        }
-//        private Foo()
-//        {
-//        }
-//    }
-//    class Program
-//    {
-//        static void Main()
-//        {
-//            Foo f = Foo.GetInstance();
-//            Foo.print();
-//        }
-//    }
-//}
-
-
 using System;
-public class SingleTon
+using System.Linq;
+
+class test
 {
-    private static SingleTon _singleTon;
-    private SingleTon() 
+    static bool isSubSequence(string subString, string mainString, int subStringLenght, int mainStringLenght)
     {
+        if (subStringLenght == 0)
+            return true;
+        if (mainStringLenght == 0)
+            return false;
+
+        var str1Char = subString[subStringLenght - 1];
+        var str2Char = mainString[mainStringLenght - 1];
+        if (str1Char == str2Char)
+        {
+            var tempArr = mainString.Split(str1Char);
+            mainString = "";
+            foreach (var item in tempArr)
+                mainString += item;
+            mainStringLenght = mainString.Length;
+            subStringLenght = subStringLenght - 1;
+            return isSubSequence(subString, mainString, subStringLenght, mainStringLenght);
+        }
+
+        return isSubSequence(subString, mainString, subStringLenght, mainStringLenght - 1);
     }
 
-    public int CalculatePow(int number)
+    // Driver program 
+    public static void Main()
     {
-        return number * number;
-    }
+        //string subString = "gksrek2";
+        string subString = "okua";
+        //string mainString = "geeksfo2rgeeks";
+        string mainString = "akceutgfd";
 
-    public static SingleTon GrtInstance()
-    {
-        if(_singleTon == null)
-            _singleTon = new SingleTon();
-        return _singleTon;
-    }
-}
+        int sLenght = subString.Length;
+        int mLenght = mainString.Length;
 
-class Program
-{
-    static void Main()
-    {
-        SingleTon testSingleTon = SingleTon.GrtInstance();
-        Console.WriteLine(testSingleTon.CalculatePow(4));
+        bool result = isSubSequence(subString, mainString, sLenght, mLenght);
+
+        if (result)
+            Console.Write("Yes");
+        else
+            Console.Write("No");
     }
 }

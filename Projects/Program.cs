@@ -1,39 +1,53 @@
-//راه حلت درسته اما مرتبه زمانیش بالاس
+﻿//راه حلت درسته اما مرتبه زمانیش بالاس
 // آیا می تونی راه حلی بدی که مرتبه زمانی بهتری داشته باشه؟
 //
-using CustomCollection.Classes;
+
+//با روش زیر هر بار یک مورد که توی سرچ پیدا میشه از متن اصلی حذف میشه
+
+
 using System;
-using ExtensionMethods;
 
-namespace CustomCollection
+class test
 {
-    class Program
+    static bool isSubSequence(string subString, string mainString, int subStringLenght, int mainStringLenght)
     {
-        static void Main()
+        if (subStringLenght == 0)
+            return true;
+        if (mainStringLenght == 0)
+            return false;
+
+        var str1Char = subString[subStringLenght - 1];
+        var str2Char = mainString[mainStringLenght - 1];
+        if (str1Char == str2Char)
         {
-            var strToFind = "abc";
-            var strPrimary = "ckbda";
-            var isContain = strPrimary.ContainsSubString(strToFind);
+            var tempArr = mainString.Split(str1Char);
+            mainString = "";
+            foreach (var item in tempArr)
+                mainString += item;
+            mainStringLenght = mainString.Length;
+            subStringLenght = subStringLenght - 1;
+            return isSubSequence(subString, mainString, subStringLenght, mainStringLenght);
         }
+
+        return isSubSequence(subString, mainString, subStringLenght, mainStringLenght - 1);
     }
-}
 
-namespace ExtensionMethods
-{
-    public static class MyExtensions
+    // Driver program 
+    public static void Main()
     {
-        public static bool ContainsSubString(this string strPrimary, string strToFind)
-        {
-            var found = false;
-            var strToFindCharArray = strToFind.ToCharArray();
-            
-            foreach (var item in strToFindCharArray)
-            {
-                found = strPrimary.Contains(item);
-                if (!found)
-                    break;
-            }
-            return found;
-        }
+        //string subString = "gksrek2";
+        string subString = "okua";
+        //string mainString = "geeksfo2rgeeks";
+        string mainString = "akceutgfd";
+
+        int sLenght = subString.Length;
+        int mLenght = mainString.Length;
+
+        bool result = isSubSequence(subString, mainString, sLenght, mLenght);
+
+        if (result)
+            Console.Write("Yes");
+        else
+            Console.Write("No");
     }
 }
