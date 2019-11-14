@@ -142,59 +142,67 @@
 
 
 
+//using System;
+//using System.Linq;
+//using System.Text;
+//using System.Text.RegularExpressions;
+//using System.Threading.Tasks;
+//using System.Threading;
+//using System.Collections.Generic;
+
+//namespace TestApplication
+//{
+//    class Foo
+//    {
+//        static string inputText = "kk";
+//        public static void print() => Console.WriteLine(inputText);
+//        public static Foo GetInstance()
+//        {
+//            Type type = typeof(Foo);
+//            Foo f = (Foo)Activator.CreateInstance(type, true);
+//            return f;
+//        }
+//        private Foo()
+//        {
+//        }
+//    }
+//    class Program
+//    {
+//        static void Main()
+//        {
+//            Foo f = Foo.GetInstance();
+//            Foo.print();
+//        }
+//    }
+//}
+
+
 using System;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Collections.Generic;
-
-namespace TestApplication
+public class SingleTon
 {
-    class Program
+    private static SingleTon _singleTon;
+    private SingleTon() 
     {
-        static void Main()
-        {
-            object obj = 10;
-            Console.WriteLine(obj.GetType());
-            obj = (int)obj + 10;
+    }
 
-            obj = 10.4;
-            obj = "10.4";
+    public int CalculatePow(int number)
+    {
+        return number * number;
+    }
 
-            dynamic dyn = 10;
-            Console.WriteLine(dyn.GetType());
-            dyn = dyn + 10;
-            dyn = 10.0;
-            dyn = dyn + 10;
+    public static SingleTon GrtInstance()
+    {
+        if(_singleTon == null)
+            _singleTon = new SingleTon();
+        return _singleTon;
+    }
+}
 
-            dyn = "10";
-            dyn = dyn + 10;
-
-
-            var k = typeof(List<object>) == typeof(List<dynamic>);
-
-            object a = "hamid";
-            string a1 = a.ToString();
-
-
-            dynamic a2 = "hamid";
-            string a21 = a2;
-
-
-            //string b = "hamid";
-            //object b1 = a;
-            //int bb = (int)b1;
-
-            string k2 = "hamid";
-            dynamic kk = k2;
-            int jjj = (int)kk;
-
-            var aaa = "kba";
-            var bbb = "cebka";
-
-
-        }
+class Program
+{
+    static void Main()
+    {
+        SingleTon testSingleTon = SingleTon.GrtInstance();
+        Console.WriteLine(testSingleTon.CalculatePow(4));
     }
 }
