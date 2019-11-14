@@ -158,10 +158,8 @@ class test
         var str2Char = mainString[mainStringLenght - 1];
         if (str1Char == str2Char)
         {
-            var tempArr = mainString.Split(str1Char);
-            mainString = "";
-            foreach (var item in tempArr)
-                mainString += item;
+            var tempList = mainString.Split(str1Char).ToList();
+            mainString = String.Join("", tempList);
             mainStringLenght = mainString.Length;
             subStringLenght = subStringLenght - 1;
             return isSubSequence(subString, mainString, subStringLenght, mainStringLenght);
@@ -176,7 +174,7 @@ class test
         //string subString = "gksrek2";
         string subString = "okua";
         //string mainString = "geeksfo2rgeeks";
-        string mainString = "akceutgfd";
+        string mainString = "akcoeutgfd";
 
         int sLenght = subString.Length;
         int mLenght = mainString.Length;
