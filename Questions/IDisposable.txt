@@ -1,1 +1,53 @@
-karbord IDisposable chie?
+﻿karbord IDisposable chie?
+
+دات نت به صورت اتوماتیک منابع اختصاص یافته را که دیگر استفاده نمی شوند توسط گاربیج کالکتور پس می گیرد(منابع مدیریت شده)
+اما منابعی که برای ارتبط با دیتابیس و ارتباط با فایل و ...
+به کار می روند(منابع مدیریت نشده) باید دستی پس گرفته شوند
+
+بنابراین از 
+dispose
+که در اینترفیس
+idisposable
+قرار دارد به صورت صریح استفاده می کنیم تا منابع را پس بگیریم
+مثل همان فایل های باز و کانکشن های دیتا بیس
+که این کار را به کمک 
+garbage collector
+انجام می دهد
+
+مثال 
+
+using System;
+
+class BaseClass : IDisposable
+{
+   // Flag: Has Dispose already been called?
+   bool disposed = false;
+   
+   // Public implementation of Dispose pattern callable by consumers.
+   public void Dispose()
+   { 
+      Dispose(true);
+      GC.SuppressFinalize(this);           
+   }
+   
+   // Protected implementation of Dispose pattern.
+   protected virtual void Dispose(bool disposing)
+   {
+      if (disposed)
+         return; 
+      
+      if (disposing) {
+         // Free any other managed objects here.
+         //
+      }
+      
+      // Free any unmanaged objects here.
+      //
+      disposed = true;
+   }
+
+   ~BaseClass()
+   {
+      Dispose(false);
+   }
+}
