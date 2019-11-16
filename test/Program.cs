@@ -144,8 +144,9 @@
 
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 
-class test
+class Test
 {
     static bool isSubSequence(string subString, string mainString, int subStringLenght, int mainStringLenght)
     {
@@ -168,9 +169,21 @@ class test
         return isSubSequence(subString, mainString, subStringLenght, mainStringLenght - 1);
     }
 
+    [DllImport("User32.dll", CharSet = CharSet.Unicode)]
+    public static extern int MessageBox(IntPtr h, string m, string c, int type);
+    static int message()
+    {
+        string myString;
+        Console.Write("Enter your message: ");
+        myString = Console.ReadLine();
+        return MessageBox((IntPtr)0, myString, "پیام من", 0);
+    }
+
     // Driver program 
     public static void Main()
     {
+        var kkk = message();
+
         //string subString = "gksrek2";
         string subString = "okua";
         //string mainString = "geeksfo2rgeeks";
@@ -187,3 +200,6 @@ class test
             Console.Write("No");
     }
 }
+
+
+
