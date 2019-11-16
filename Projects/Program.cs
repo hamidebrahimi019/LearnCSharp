@@ -31,7 +31,6 @@ class test
         return isSubSequence(subString, mainString, subStringLenght, mainStringLenght - 1);
     }
 
-    // Driver program 
     public static void Main()
     {
         //string subString = "gksrek2";
