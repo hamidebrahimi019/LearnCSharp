@@ -143,6 +143,8 @@
 
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -182,6 +184,12 @@ class Test
     // Driver program 
     public static void Main()
     {
+        var letters = Enumerable.Range(0, 25).Select(i => (char)((int)'a' + i));//create the alphabet
+        ArrayList nonGeneric = new ArrayList();
+        nonGeneric.AddRange(new string[] { "red", "green", "blue" });
+        IEnumerable<string> generic = nonGeneric.Cast<string>();
+        generic.ToList().ForEach(Console.WriteLine);
+
         var kkk = message();
 
         //string subString = "gksrek2";

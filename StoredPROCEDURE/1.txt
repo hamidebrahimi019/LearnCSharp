@@ -1,0 +1,26 @@
+ALTER PROCEDURE [dbo].[Calculate_EquipmentIncomes] 
+@labOwnerId as int,
+@fromDate as varchar(max),
+@toDate as varchar(max)
+AS
+BEGIN
+
+DECLARE	@fullPath nvarchar(max) = (select FullPath from dbo.Organization where id = @labOwnerId) + '%'
+
+SELECT CASE WHEN ([Join2].[Amount_Amount] IS NULL) THEN cast(0 as bigint) ELSE [Join2].[Amount_Amount] END AS [SumAmount]
+    FROM   (SELECT 
+        [Extent2].[Id] AS [Id]
+        FROM  [dbo].[Organization] AS [Extent1]
+        INNER JOIN [dbo].[Lab] AS [Extent2] ON ([Extent1].[Id] = [Extent2].[Id]) AND ([Extent2].[Id] = [Extent1].[Id])
+        WHERE (([Extent1].[IsDeleted] <> 1) OR ([Extent1].[IsDeleted] IS NULL)) AND ([Extent1].[FullPath] LIKE @fullPath ESCAPE N'~') AND (([Extent1].[IsDeleted] <> 1) OR ([Extent1].[IsDeleted] IS NULL)) ) AS [Project1]
+    INNER JOIN  (SELECT [Extent3].[EquipmentId] AS [EquipmentId], [Extent3].[IncomeDate] AS [IncomeDate], [Extent3].[Amount_Amount] AS [Amount_Amount], [Extent4].[IsDeleted] AS [IsDeleted]
+        FROM  [dbo].[EquipmentIncome] AS [Extent3]
+        INNER JOIN [dbo].[FinanceApprovableEntity] AS [Extent4] ON [Extent3].[Id] = [Extent4].[Id] ) AS [Join2] ON  EXISTS (SELECT 
+        1 AS [C1]
+        FROM   ( SELECT 1 AS X ) AS [SingleRowTable1]
+        INNER JOIN [dbo].[Equipment] AS [Extent5] ON 1 = 1
+        WHERE ([Join2].[EquipmentId] = [Extent5].[Id]) AND ([Project1].[Id] = [Extent5].[LabId])
+    )
+    WHERE (([Join2].[IsDeleted] <> 1) OR ([Join2].[IsDeleted] IS NULL)) AND ([Join2].[IncomeDate] >= @fromDate) AND ([Join2].[IncomeDate] < @toDate)
+
+END
